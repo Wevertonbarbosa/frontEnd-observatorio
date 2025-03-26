@@ -18,3 +18,15 @@ export const fetchSidraData = async (year: any, code: any) => {
         throw error;
     }
 };
+
+export const fetchSidraDataGroup = async (year: any, code: any, code2: any) => {
+    try {
+        const response = await api.get(
+            `/t/1842/n1/all/v/${code},${code2}/c12762/all/p/${year}`
+        );
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar dados da API SIDRA:', error);
+        throw error;
+    }
+};

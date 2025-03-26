@@ -22,6 +22,7 @@ import React from 'react';
 const ANOS_DISPONIVEIS = Array.from({ length: 2022 - 2007 + 1 }, (_, i) =>
     (2007 + i).toString()
 ).reverse();
+
 const TITULOS_POR_PAGINA = 7;
 
 const TabelaDinamica = () => {
@@ -142,12 +143,11 @@ const TabelaDinamica = () => {
                     item.title ===
                         VARIAVEIS_DISPONIVEIS.find(
                             (variavel) => variavel.D2C === variavelSelecionada
-                        )?.D2N && item.year === anoSelecionado // Use D4C para acessar o ano
+                        )?.D2N && item.year === anoSelecionado
             ),
         [processedData, anoSelecionado, variavelSelecionada]
     );
 
-    const totalPages = Math.ceil(filteredData?.length / TITULOS_POR_PAGINA);
     const startIndex = (currentPage - 1) * TITULOS_POR_PAGINA;
     const currentData = filteredData?.slice(
         startIndex,
@@ -163,7 +163,7 @@ const TabelaDinamica = () => {
                         value={anoSelecionado}
                         onValueChange={setAnoSelecionado}
                     >
-                        <SelectTrigger className="w-48">
+                        <SelectTrigger className="w-full sm:w-48">
                             <SelectValue placeholder="Selecione o Ano" />
                         </SelectTrigger>
                         <SelectContent>
@@ -179,7 +179,7 @@ const TabelaDinamica = () => {
                         value={variavelSelecionada}
                         onValueChange={setVariavelSelecionada}
                     >
-                        <SelectTrigger className="w-48">
+                        <SelectTrigger className="w-full sm:w-48">
                             <SelectValue placeholder="Selecione a Variável" />
                         </SelectTrigger>
                         <SelectContent>
@@ -213,8 +213,12 @@ const TabelaDinamica = () => {
                             <Table className="w-full table-auto">
                                 <TableHeader className="bg-blue-600 text-white sticky top-0 z-10">
                                     <TableRow>
-                                        <TableHead className="p-3">
-                                            Título
+                                        <TableHead
+                                            colSpan={2}
+                                            className="p-3 text-center text-white text-xl"
+                                        >
+                                            Pesquisa Industrial Anual - Empresa
+                                            (PIA Empresa)
                                         </TableHead>
                                     </TableRow>
                                 </TableHeader>
@@ -222,7 +226,6 @@ const TabelaDinamica = () => {
                                 <TableBody className="divide-y divide-gray-200">
                                     {currentData?.map((row, index) => (
                                         <React.Fragment key={index}>
-                                            {/* Título centralizado */}
                                             <TableRow>
                                                 <TableCell
                                                     colSpan={2}
@@ -232,16 +235,6 @@ const TabelaDinamica = () => {
                                                 </TableCell>
                                             </TableRow>
 
-                                            <TableRow>
-                                                <TableCell className="text-center font-bold p-3">
-                                                    Subtitulo
-                                                </TableCell>
-                                                <TableCell className="text-center font-bold ">
-                                                    Valor
-                                                </TableCell>
-                                            </TableRow>
-
-                                            {/* Subtítulos e valores na mesma linha */}
                                             {row.subtitulos.map(
                                                 (subtitulo, i) => (
                                                     <TableRow key={i}>
@@ -249,7 +242,7 @@ const TabelaDinamica = () => {
                                                             className="text-start p-3 font-medium"
                                                             style={{
                                                                 maxWidth:
-                                                                    '150px', // Ajuste conforme necessário
+                                                                    '150px',
                                                                 overflow:
                                                                     'hidden',
                                                                 textOverflow:

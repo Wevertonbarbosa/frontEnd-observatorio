@@ -82,38 +82,11 @@ export default function HeaderMenu() {
                     >
                         <Link href="/" className="flex items-center space-x-2">
                             <div className="h-8 w-8 rounded-full bg-primary" />
-                            <span className="text-xl font-bold">Brand</span>
+                            <span className="text-xl font-bold">
+                                Observatório
+                            </span>
                         </Link>
                     </motion.div>
-
-                    {/* Desktop Navigation */}
-                    <motion.nav
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.3, delay: 0.1 }}
-                        className="hidden md:flex md:items-center md:space-x-6"
-                    >
-                        {navItems.map((item, index) => (
-                            <motion.div
-                                key={item.name}
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{
-                                    duration: 0.3,
-                                    delay: 0.1 + index * 0.1,
-                                }}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <Link
-                                    href={item.href}
-                                    className="text-sm font-medium transition-colors hover:text-primary"
-                                >
-                                    {item.name}
-                                </Link>
-                            </motion.div>
-                        ))}
-                    </motion.nav>
 
                     {/* User Menu (Desktop) */}
                     <motion.div
